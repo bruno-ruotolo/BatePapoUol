@@ -3,13 +3,21 @@
 }
 
 body{
+    position: relative;
     background-color: #E5E5E5;
     font-family: 'Roboto', sans-serif;
 }
 
 /* HEADER */
 header {
-    display: fixed;
+    position: fixed;
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 22px 11px 22px ;
+    top: 0;
+    left: 0;
     height: 80px;
     width: 100%;
     background-color: #FFFFFF;
@@ -17,12 +25,37 @@ header {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-header div {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px 22px 11px 22px ;
+
+header ion-icon {
+    font-size: 42px;
 }
 
-ion-icon {
-    font-size: 42px;
+/* FOOTER */
+
+footer {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 17px;
+    bottom: 0;
+    left: 0;
+    height: 80px;
+    width: 100%;
+    background-color: #FFFFFF;
+    /* background-color: blue; */
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+}
+
+footer input {
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+    background-color: #FFFFFF;
+    border: none;
+}
+
+footer ion-icon {
+    font-size: 26px;
 }

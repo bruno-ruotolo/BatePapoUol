@@ -10,23 +10,40 @@
     <link rel="stylesheet" href="reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="imagens/favicon-32x32.png">
 </head>
 
 <body>
-    <header>
+    <!-- HEADER -->
+    <header class="hidden">
         <img src="imagens/logo-uol.png" alt="Logo UOL">
         <ion-icon name="people"></ion-icon>
     </header>
 
-    <footer>
-        <input type="text" placeholder="Escreva aqui...">
+    <!-- BONUS LOGIN -->
+    <aside>
+        <img src="imagens/logo-uol.png" alt="Logo UOL">
+        <input type="text" placeholder="Digite seu nome">
+        <button onclick="loginButton(this)">Entrar</button>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="hidden">
+        <div class="status-room"></div>
+        <div class="public-messages"></div>
+        <div class="private-messages"></div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="hidden">
+        <input type="text" placeholder="Escreva aqui..."> </input>
         <ion-icon name="paper-plane-outline"></ion-icon>
     </footer>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="script.js"></script>

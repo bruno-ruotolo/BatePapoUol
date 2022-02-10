@@ -10,8 +10,7 @@ function startSearch() {
 function searchDatas(response) {
     document.querySelector("aside").classList.add("hidden");
     responseData = response.data;
-    console.log(responseData);
-    console.log(responseData.length)
+
     printOnScreen(responseData);
 }
 
@@ -40,33 +39,46 @@ function refreshingPage() {
 
 }
 
+let counterTrue = 0;
 function updateMessages(response) {
     responseData = response.data
     console.log("Reiniciando");
-    // const compareTime = (responseData[responseDataLength].time !== oldResponseData[responseDataLength].time);
-    // const compareText = (responseData[responseDataLength].text !== oldResponseData[responseDataLength].text);
-    // const compareUser = (responseData[responseDataLength].from !== oldResponseData[responseDataLength].from);
-    // compareTime || compareText || compareUser:
-
     const main = document.querySelector("main");
-    for (let i = 90; i < responseData.length; i++) {
-        if (responseData[i] !== oldResponseData[i]) {
-            if (responseData[i].type === "status") {
-                main.innerHTML += `<div class="status-room"><small>${responseData[i].time}</small><strong>${responseData[i].from}</strong> ${responseData[i].text}</div>\n`;
-            }
-            else if (responseData[i].type === "message") {
-                main.innerHTML += `<div class="public-messages"><small>${responseData[i].time}</small><strong>${responseData[i].from}</strong> para <strong>${responseData[i].to}</strong>: ${responseData[i].text}</div>\n`;
-            }
-            else if (responseData[i].type === "private_message") {
-                main.innerHTML += `<div class="private-messages"><small>${responseData[i].time}</small><strong>${responseData[i].from}</strong> reservadamente para <strong>${responseData[i].to}</strong>: ${responseData[i].text}<div>\n`;
+
+    for (let j = 95; j < 100; j++) {
+        for (let i = (responseData.length - 1); i > 94; i--) {
+
+            let compareTime = (responseData[j].time !== oldResponseData[i].time);
+            let compareText = (responseData[j].text !== oldResponseData[i].text);
+            let compareUser = (responseData[j].from !== oldResponseData[i].from);
+            let compareReceiver = (responseData[j].to !== oldResponseData[i].to);
+
+            if (compareText || compareTime || compareUser || compareReceiver) {
+                counterTrue++;
+                console.log(counterTrue)
+            } else {
+                counterTrue = 0;
+                i = 94;
             }
         }
+        if (counterTrue === 5) {
+            if (responseData[j].type === "status") {
+                main.innerHTML += `<div class="status-room"><small>${responseData[j].time}</small><strong>${responseData[j].from}</strong> ${responseData[j].text}</div>\n`;
+            }
+            else if (responseData[j].type === "message") {
+                main.innerHTML += `<div class="public-messages"><small>${responseData[j].time}</small><strong>${responseData[j].from}</strong> para <strong>${responseData[j].to}</strong>: ${responseData[j].text}</div>\n`;
+            }
+            else if (responseData[j].type === "private_message") {
+                main.innerHTML += `<div class="private-messages"><small>${responseData[j].time}</small><strong>${responseData[j].from}</strong> reservadamente para <strong>${responseData[j].to}</strong>: ${responseData[j].text}<div>\n`;
+            }
+            console.log("Deu 20");
+        }
+        counterTrue = 0;
     }
+    oldResponseData = responseData;
     const lastStatusDiv = main.querySelectorAll(".status-room");
     lastStatusDiv[lastStatusDiv.length - 1].scrollIntoView();
-    oldResponseData = responseData;
 }
-
 
 function loginButton() {
 
@@ -147,7 +159,7 @@ function statusUser() {
 
 function responseUserStatus(response) {
     console.log("User Status")
-    console.log(response)
+    // console.log(response)
 }
 
 function errorFunction(erro) {

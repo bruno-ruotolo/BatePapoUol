@@ -3,7 +3,7 @@
 }
 
 body{
-    background-color: #f3f3F3;
+    background-color: #E5E5E5;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -19,8 +19,8 @@ header {
     height: 80px;
     width: 100%;
     background-color: #FFFFFF;
-    /* background-color: red; */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    z-index: 1;
 }
 
 
@@ -82,9 +82,9 @@ main{
     flex-direction: column;
     top: 106px;
     margin-bottom: 80px;
-    /* background-color: purple; */
     height: 100%;
     flex-wrap: wrap;
+    margin-bottom: 180px;
 }
 
 strong{
@@ -100,30 +100,30 @@ small{
     background-color: #DCDCDC;
     border-radius: 2px;
     padding: 8px;
-    margin-bottom: 4px;
     line-height: 20px;
     font-size: 14px;
+    margin-bottom: 4px;
 }
+
 
 .public-messages{
     background-color: #FFFFFF;
     border-radius: 2px;
     padding: 8px;
-    margin-bottom: 4px;
     line-height: 20px;
     font-size: 14px;
-
+    margin-bottom: 4px;
 }
 
 .private-messages{
     background-color: #FFDEDE;
     border-radius: 2px;
     padding: 8px;
-    margin-bottom: 4px;
     line-height: 20px;
     font-size: 14px;
-
+    margin-bottom: 4px;
 }
+
 /* FOOTER */
 
 footer {

@@ -1,33 +1,63 @@
+let responseDataLength = 0;
+let responseData = [];
+let oldResponseData = [];
+
 let promise = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
 promise.then(searchDatas);
 
 function searchDatas(response) {
-    const respondeData = response.data;
-    console.log(respondeData);
-    console.log(respondeData.length)
-    printOnScreen(respondeData);
+    responseData = response.data;
+    console.log(responseData);
+    console.log(responseData.length)
+    printOnScreen(responseData);
 }
 
-function printOnScreen(respondeData) {
-    const status = document.querySelector(".status-room");
-    const publicMessages = document.querySelector(".public-messages");
-    const privateMessages = document.querySelector(".private-messages");
+function printOnScreen(responseData) {
+    const main = document.querySelector("main");
 
-    for (let i = 0; i < respondeData.length; i++) {
-        if (respondeData[i].type === "status") {
-            status.innerHTML += `<small>${respondeData[i].time}</small><strong>${respondeData[i].from}</strong> ${respondeData[i].text}`;
+    for (let i = 0; i < responseData.length; i++) {
+        if (responseData[i].type === "status") {
+            main.innerHTML += ` <div class="status-room"><small>${responseData[i].time}</small><strong>${responseData[i].from}</strong> ${responseData[i].text}</div>\n`;
         }
-        else if (respondeData[i].type === "message") {
-            publicMessages.innerHTML += `<small>${respondeData[i].time}</small><strong>${respondeData[i].from}</strong> para <strong>${respondeData[i].to}</strong>: ${respondeData[i].text}`;
+        else if (responseData[i].type === "message") {
+            main.innerHTML += `<div class="public-messages"><small>${responseData[i].time}</small><strong>${responseData[i].from}</strong> para <strong>${responseData[i].to}</strong>: ${responseData[i].text}</div>\n`;
         }
-        else if (respondeData[i].type === "private_message") {
-            privateMessages.innerHTML += `<small>${respondeData[i].time}</small><strong>${respondeData[i].from}</strong> reservadamente para <strong>${respondeData[i].to}</strong>: ${respondeData[i].text}`;
+        else if (responseData[i].type === "private_message") {
+            main.innerHTML += `<div class="private-messages"><small>${responseData[i].time}</small><strong>${responseData[i].from}</strong> reservadamente para <strong>${responseData[i].to}</strong>: ${responseData[i].text}<div>\n`;
         }
     }
+    responseDataLength = responseData.length - 1;
+    oldResponseData = responseData;
+    setInterval(refreshingPage, 3000);
 }
+
+function refreshingPage() {
+    promise = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+    promise.then(updateMessages);
+
+}
+
+function updateMessages(response) {
+    responseData = response.data
+    console.log("Reiniciando");
+    const compareTime = (responseData[responseDataLength].time !== oldResponseData[responseDataLength].time);
+    const compareText = (responseData[responseDataLength].text !== oldResponseData[responseDataLength].text);
+    const compareUser = (responseData[responseDataLength].from !== oldResponseData[responseDataLength].from);
+
+    const main = document.querySelector("main");
+
+    if (compareTime || compareText || compareUser) {
+        main.innerHTML += `<div class="status-room"><small>${responseData[responseDataLength].time}</small><strong>${responseData[responseDataLength].from}</strong> ${responseData[responseDataLength].text}</div>\n`;
+        const lastStatusDiv = main.querySelectorAll(".status-room");
+        lastStatusDiv[responseDataLength].scrollIntoView();
+        oldResponseData = responseData;
+
+    }
+}
+
 function loginButton(element) {
     const loginName = document.querySelector("aside input").value;
-    console.log(loginName)
+    console.log(loginName);
 
     const divMain = document.querySelector("main");
     const divHeader = document.querySelector("header");
@@ -39,8 +69,3 @@ function loginButton(element) {
 
     element.parentNode.classList.add("hidden");
 }
-
-// function scrollMain() {
-//     const mainScroll = document.querySelector("main div");
-//     // mainScroll.scrollIntoView();
-// }

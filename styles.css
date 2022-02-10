@@ -94,6 +94,7 @@ main{
     height: 100%;
     flex-wrap: wrap;
     margin-bottom: 180px;
+    flex-wrap: wrap;
 }
 
 strong{
@@ -106,31 +107,39 @@ small{
 }
 
 .status-room{
+    overflow-wrap: break-word;
     background-color: #DCDCDC;
     border-radius: 2px;
     padding: 8px;
     line-height: 20px;
     font-size: 14px;
     margin-bottom: 4px;
+    max-width: 100%;
 }
 
 
 .public-messages{
+    overflow-wrap: break-word;
     background-color: #FFFFFF;
     border-radius: 2px;
     padding: 8px;
     line-height: 20px;
     font-size: 14px;
     margin-bottom: 4px;
+    max-width: 100%;
+
 }
 
 .private-messages{
+    overflow-wrap: break-word;
     background-color: #FFDEDE;
     border-radius: 2px;
     padding: 8px;
     line-height: 20px;
     font-size: 14px;
     margin-bottom: 4px;
+    max-width: 100%;
+    
 }
 
 /* FOOTER */

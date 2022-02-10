@@ -69,11 +69,11 @@ function updateMessages(response) {
 function loginButton() {
 
     const loginName = document.querySelector("aside input").value;
-    console.log(loginName);
     document.querySelector(".aside-input").classList.add("hidden");
     document.querySelector(".aside-buttom").classList.add("hidden");
     document.querySelector(".loading").classList.remove("hidden");
     document.querySelector(".aside-text").classList.remove("hidden");
+    postNameuser();
     startSearch();
 
 
@@ -84,4 +84,18 @@ function loginButton() {
     divMain.classList.remove("hidden");
     divHeader.classList.remove("hidden");
     divFooter.classList.remove("hidden");
+}
+
+function postNameuser() {
+    const inputeNameValue = document.querySelector(".aside-input").value;
+    const objectName = {
+        name: `${inputeNameValue}`
+    }
+
+    const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", objectName);
+    promise.then(addUsernameSucessfull);
+}
+
+function addUsernameSucessfull(response) {
+    console.log(response);
 }

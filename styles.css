@@ -42,12 +42,21 @@ aside{
     background-color: #FFFFFF;
 }
 
-aside img {
+.uol-logo {
     width: 130px;
     height: 92px;
     margin: 72px 0 94px 0;
 }
 
+.loading {
+    width: 150px;
+}
+
+aside p {
+    font-size:  25px;
+    font-style: italic;
+    text-shadow: 0 2px 1px rgba(175, 79, 0, 0.5); 
+}
 aside input{
     height: 54px;
     width: 261px;

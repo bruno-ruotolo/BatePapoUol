@@ -2,10 +2,13 @@ let responseDataLength = 0;
 let responseData = [];
 let oldResponseData = [];
 
-let promise = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
-promise.then(searchDatas);
+function startSearch() {
+    let promise = axios.get("https://mock-api.driven.com.br/api/v4/uol/messages");
+    promise.then(searchDatas);
+}
 
 function searchDatas(response) {
+    document.querySelector("aside").classList.add("hidden");
     responseData = response.data;
     console.log(responseData);
     console.log(responseData.length)
@@ -49,15 +52,21 @@ function updateMessages(response) {
     if (compareTime || compareText || compareUser) {
         main.innerHTML += `<div class="status-room"><small>${responseData[responseDataLength].time}</small><strong>${responseData[responseDataLength].from}</strong> ${responseData[responseDataLength].text}</div>\n`;
         const lastStatusDiv = main.querySelectorAll(".status-room");
-        lastStatusDiv[responseDataLength].scrollIntoView();
+        lastStatusDiv[lastStatusDiv.length - 1].scrollIntoView();
         oldResponseData = responseData;
-
     }
 }
 
-function loginButton(element) {
+function loginButton() {
+
     const loginName = document.querySelector("aside input").value;
     console.log(loginName);
+    document.querySelector(".aside-input").classList.add("hidden");
+    document.querySelector(".aside-buttom").classList.add("hidden");
+    document.querySelector(".loading").classList.remove("hidden");
+    document.querySelector(".aside-text").classList.remove("hidden");
+    startSearch();
+
 
     const divMain = document.querySelector("main");
     const divHeader = document.querySelector("header");
@@ -66,6 +75,4 @@ function loginButton(element) {
     divMain.classList.remove("hidden");
     divHeader.classList.remove("hidden");
     divFooter.classList.remove("hidden");
-
-    element.parentNode.classList.add("hidden");
 }

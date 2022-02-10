@@ -76,7 +76,9 @@ function loginButton() {
     document.querySelector(".loading").classList.remove("hidden");
     document.querySelector(".aside-text").classList.remove("hidden");
     postNameuser();
-    startSearch();
+    setInterval(statusUser, 5000);
+    setTimeout(startSearch, 200);
+
 
 
     const divMain = document.querySelector("main");
@@ -96,8 +98,14 @@ function postNameuser() {
 
     const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", objectName);
     promise.then(addUsernameSucessfull);
+    promise.catch(addUsernameError)
 }
+function addUsernameError() {
+    document.querySelector("main").classList.add("hidden")
+    alert("Este nome já está em uso, por favor, utilize outro!")
+    window.location.reload();
 
+}
 function addUsernameSucessfull(response) {
     console.log(response);
 }
@@ -115,9 +123,39 @@ function postMessages() {
     const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", objectMessages);
     inputMessages.value = "";
     promise.then(addMessagesSucessfull);
+    promise.catch(addMesaageError);
 
 }
-
+function addMesaageError() {
+    window.location.reload();
+}
 function addMessagesSucessfull(response) {
     console.log(response);
 }
+
+
+
+function statusUser() {
+    const inputNameValue = document.querySelector(".aside-input").value;
+    const objectStatus = {
+        name: `${inputNameValue}`
+    }
+    const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", objectStatus);
+    promise.then(responseUserStatus);
+    promise.catch(errorFunction);
+}
+
+function responseUserStatus(response) {
+    console.log("User Status")
+    console.log(response)
+}
+
+function errorFunction(erro) {
+    console.log(erro.response)
+}
+
+function enterToSendMessage() {
+    const divInput = document.querySelector("footer input");
+    divInput.addEventListener("keyup")
+}
+

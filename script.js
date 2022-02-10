@@ -43,26 +43,28 @@ function refreshingPage() {
 function updateMessages(response) {
     responseData = response.data
     console.log("Reiniciando");
-    const compareTime = (responseData[responseDataLength].time !== oldResponseData[responseDataLength].time);
-    const compareText = (responseData[responseDataLength].text !== oldResponseData[responseDataLength].text);
-    const compareUser = (responseData[responseDataLength].from !== oldResponseData[responseDataLength].from);
+    // const compareTime = (responseData[responseDataLength].time !== oldResponseData[responseDataLength].time);
+    // const compareText = (responseData[responseDataLength].text !== oldResponseData[responseDataLength].text);
+    // const compareUser = (responseData[responseDataLength].from !== oldResponseData[responseDataLength].from);
+    // compareTime || compareText || compareUser:
 
     const main = document.querySelector("main");
-
-    if (compareTime || compareText || compareUser) {
-        if (responseData[responseDataLength].type === "status") {
-            main.innerHTML += `<div class="status-room"><small>${responseData[responseDataLength].time}</small><strong>${responseData[responseDataLength].from}</strong> ${responseData[responseDataLength].text}</div>\n`;
+    for (let i = 90; i < responseData.length; i++) {
+        if (responseData[i] !== oldResponseData[i]) {
+            if (responseData[i].type === "status") {
+                main.innerHTML += `<div class="status-room"><small>${responseData[i].time}</small><strong>${responseData[i].from}</strong> ${responseData[i].text}</div>\n`;
+            }
+            else if (responseData[i].type === "message") {
+                main.innerHTML += `<div class="public-messages"><small>${responseData[i].time}</small><strong>${responseData[i].from}</strong> para <strong>${responseData[i].to}</strong>: ${responseData[i].text}</div>\n`;
+            }
+            else if (responseData[i].type === "private_message") {
+                main.innerHTML += `<div class="private-messages"><small>${responseData[i].time}</small><strong>${responseData[i].from}</strong> reservadamente para <strong>${responseData[i].to}</strong>: ${responseData[i].text}<div>\n`;
+            }
         }
-        else if (responseData[responseDataLength].type === "message") {
-            main.innerHTML += `<div class="public-messages"><small>${responseData[responseDataLength].time}</small><strong>${responseData[responseDataLength].from}</strong> para <strong>${responseData[responseDataLength].to}</strong>: ${responseData[responseDataLength].text}</div>\n`;
-        }
-        else if (responseData[responseDataLength].type === "private_message") {
-            main.innerHTML += `<div class="private-messages"><small>${responseData[responseDataLength].time}</small><strong>${responseData[responseDataLength].from}</strong> reservadamente para <strong>${responseData[responseDataLength].to}</strong>: ${responseData[responseDataLength].text}<div>\n`;
-        }
-        const lastStatusDiv = main.querySelectorAll(".status-room");
-        lastStatusDiv[lastStatusDiv.length - 1].scrollIntoView();
-        oldResponseData = responseData;
     }
+    const lastStatusDiv = main.querySelectorAll(".status-room");
+    lastStatusDiv[lastStatusDiv.length - 1].scrollIntoView();
+    oldResponseData = responseData;
 }
 
 
@@ -97,5 +99,25 @@ function postNameuser() {
 }
 
 function addUsernameSucessfull(response) {
+    console.log(response);
+}
+
+function postMessages() {
+    const inputNameValue = document.querySelector(".aside-input").value;
+    let inputMessages = document.querySelector("footer input");
+    const objectMessages = {
+        from: `${inputNameValue}`,
+        to: `Todos`,
+        text: `${inputMessages.value}`,
+        type: "message"
+    }
+
+    const promise = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", objectMessages);
+    inputMessages.value = "";
+    promise.then(addMessagesSucessfull);
+
+}
+
+function addMessagesSucessfull(response) {
     console.log(response);
 }

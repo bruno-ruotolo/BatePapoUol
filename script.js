@@ -50,12 +50,21 @@ function updateMessages(response) {
     const main = document.querySelector("main");
 
     if (compareTime || compareText || compareUser) {
-        main.innerHTML += `<div class="status-room"><small>${responseData[responseDataLength].time}</small><strong>${responseData[responseDataLength].from}</strong> ${responseData[responseDataLength].text}</div>\n`;
+        if (responseData[responseDataLength].type === "status") {
+            main.innerHTML += `<div class="status-room"><small>${responseData[responseDataLength].time}</small><strong>${responseData[responseDataLength].from}</strong> ${responseData[responseDataLength].text}</div>\n`;
+        }
+        else if (responseData[responseDataLength].type === "message") {
+            main.innerHTML += `<div class="public-messages"><small>${responseData[responseDataLength].time}</small><strong>${responseData[responseDataLength].from}</strong> para <strong>${responseData[responseDataLength].to}</strong>: ${responseData[responseDataLength].text}</div>\n`;
+        }
+        else if (responseData[responseDataLength].type === "private_message") {
+            main.innerHTML += `<div class="private-messages"><small>${responseData[responseDataLength].time}</small><strong>${responseData[responseDataLength].from}</strong> reservadamente para <strong>${responseData[responseDataLength].to}</strong>: ${responseData[responseDataLength].text}<div>\n`;
+        }
         const lastStatusDiv = main.querySelectorAll(".status-room");
         lastStatusDiv[lastStatusDiv.length - 1].scrollIntoView();
         oldResponseData = responseData;
     }
 }
+
 
 function loginButton() {
 

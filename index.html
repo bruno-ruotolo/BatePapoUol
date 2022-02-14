@@ -25,9 +25,9 @@
     <!-- BONUS LOGIN -->
     <aside>
         <img class="uol-logo" src="imagens/logo-uol.png" alt="Logo UOL">
-        <input type="text" class="aside-input" placeholder="Digite seu nome">
+        <input type="text" class="aside-input" data-identifier="enter-name" placeholder="Digite seu nome">
         <img class="loading hidden" src="imagens/reloading.gif" alt="Reloading">
-        <button class="aside-buttom" onclick="loginButton()">Entrar</button>
+        <button class="aside-buttom" data-identifier="start" onclick="loginButton()">Entrar</button>
         <p class="aside-text hidden">Entrando...</p>
     </aside>
 
@@ -38,7 +38,7 @@
     <!-- FOOTER -->
     <footer class="hidden">
         <input type="text" placeholder="Escreva aqui..."> </input>
-        <ion-icon onclick="postMessages()" name="paper-plane-outline"></ion-icon>
+        <ion-icon data-identifier="send-message" onclick="postMessages()" name="paper-plane-outline"></ion-icon>
     </footer>
 
 
@@ -46,6 +46,27 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="script.js"></script>
+
+    <!-- BONUS BARRA LATERAL
+
+    <section class="side-bar">
+        <div class="backgound"></div>
+        <div class="content">
+            <p>Escolha um contato para enviar mensagem:</p>
+            <div>
+                <ion-icon name="people"></ion-icon>
+                <p>Todos</p>
+                <ion-icon name="checkmark-sharp"></ion-icon>
+            </div>
+            <p>Escolha a visibilidade:</p>
+            <div>
+                <ion-icon name="lock-open"></ion-icon>
+            </div>
+        </div>
+        </div>
+    </section> -->
+
 </body>
+
 
 </html>

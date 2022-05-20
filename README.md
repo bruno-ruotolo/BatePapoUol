@@ -1,6 +1,7 @@
 # BatePapoUol
 An online chat based of the old website Bate Papo Uol.
 
+<img src="/assets/BatePapoUolMobile.gif" />
 <img src="/assets/BatePapoUol.gif" />
 
 Try it out at https://bruno-ruotolo.github.io/BatePapoUol/

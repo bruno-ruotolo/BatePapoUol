@@ -28,4 +28,4 @@ The following tools, frameworks and languages were used in this project:<br>
 ## How to run
 
 1. Clone this repository
-2. Open de `index.html` file on your browser or use the Live Server extension on VS CODE.
+2. Open the `index.html` file on your browser or use the Live Server extension on VS CODE.
